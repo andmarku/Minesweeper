@@ -10,17 +10,35 @@ Cell::Cell() {
 	else { mine = false; }
 
 	revealed = false;
+	assigned = false;
 
-}
+};
 
-bool Cell::reveal() {
-	revealed = true;
+bool Cell::is_revealed() {
+	return revealed;
+};
+
+bool Cell::is_assigned() {
+	return assigned;
+};
+
+bool Cell::is_mine() {
 	return mine;
-}
+};
+
+void Cell::reveal() {
+	revealed = true;
+};
 
 void Cell::assign(int number) {
+	assigned = true;
 	value = number;
-}
+};
+
+int Cell::get_value() {
+	return value;
+};
+
 
 // The percentage of being a mine
 const double Cell::percentage = 0.1;

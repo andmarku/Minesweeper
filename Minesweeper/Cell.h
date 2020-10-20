@@ -6,7 +6,13 @@ public:
 
 	Cell();
 
-	bool reveal();
+	bool is_revealed();
+	bool is_assigned();
+	bool is_mine();
+
+	int get_value();
+
+	void reveal();
 	void assign(int number);
 
 private:
@@ -16,6 +22,8 @@ private:
 	int value;
 
 	bool mine;
+
 	bool revealed;
+	bool assigned;
 
 };

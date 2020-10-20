@@ -8,9 +8,11 @@ int main() {
 
     Game game(10, 10);
 
-    std::cout << "Printing board\n--------------\n";
-    game.print();
-    std::cout << "--------------\n";
+    game.print_board();
+    
+    game.reveal(4, 4);
+
+    game.print_board();
 
     return 0;
 
