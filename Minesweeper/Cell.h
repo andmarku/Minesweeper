@@ -7,7 +7,6 @@ public:
 	Cell();
 
 	bool is_revealed();
-	bool is_assigned();
 	bool is_mine();
 
 	int get_value();
@@ -24,6 +23,5 @@ private:
 	bool mine;
 
 	bool revealed;
-	bool assigned;
 
 };

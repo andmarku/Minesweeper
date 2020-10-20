@@ -6,13 +6,7 @@ int main() {
 
     std::cout << "Welcome to Minesweeper!\n";
 
-    Game game(10, 10);
-
-    game.print_board();
-    
-    game.reveal(4, 4);
-
-    game.print_board();
+    Game game(5, 5);
 
     return 0;
 

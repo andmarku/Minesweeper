@@ -10,16 +10,11 @@ Cell::Cell() {
 	else { mine = false; }
 
 	revealed = false;
-	assigned = false;
 
 };
 
 bool Cell::is_revealed() {
 	return revealed;
-};
-
-bool Cell::is_assigned() {
-	return assigned;
 };
 
 bool Cell::is_mine() {
@@ -31,7 +26,6 @@ void Cell::reveal() {
 };
 
 void Cell::assign(int number) {
-	assigned = true;
 	value = number;
 };
 

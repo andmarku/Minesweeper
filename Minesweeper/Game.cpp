@@ -1,96 +1,39 @@
-
 #include "Game.h"
 
-#include <stdlib.h>
 #include <iostream>
-
 #include <new>
 
-Game::Game(int height, int width) {
+Game::Game(int rows, int cols) {
 
-	rows = height;
-	cols = width;
+	board = new Board(rows, cols);
 
-	cells = new Cell * [rows];
-	for (int i = 0; i < rows; i++)
-		cells[i] = new Cell[cols];
+	int x, y;
 
-};
+	board->print();
 
-Game::~Game() {
-	for (int i = 0; i < rows; i++)
-		delete cells[i];
-	delete cells;
-};
+	while (board->get_status() == 0) {
 
-void Game::reveal(int row, int col) {
+		std::cout << "\nEnter row: ";
 
-	if (!cells[row][col].is_revealed()) {
+		std::cin >> x;
 
-		cells[row][col].reveal();
-		int mines_count = count_mines(row, col);
-		cells[row][col].assign(mines_count);
+		std::cout << "Enter col: ";
 
-		std::cout << "row: " << row << " col: " << col << " mines_count: " << mines_count << std::endl;
+		std::cin >> y;
 
-		// If there are no mines, reveal neighbors
-		if (mines_count == 0) {
-			for (int i = -1; i <= 1; i++) {
-				for (int j = -1; j <= 1; j++) {
-					if (is_cell(row + i, col + j)) {
-						if (!cells[row + i][col + j].is_revealed()) {
-							reveal(row + i, col + j);
-						}
-					}
-				}
-			}
+		board->reveal(x, y);
+
+		board->print();
+
+		if (board->get_status() == 2) {
+			std::cout << "\nYou won!\n";
 		}
-
-	}
-
-};
-
-int Game::count_mines(int row, int col) {
-
-	int mines_count = 0;
-
-	for (int i = -1; i <= 1; i++) {
-		for (int j = -1; j <= 1; j++) {
-			if (is_cell(row + i, col + j)) {
-				if (cells[row + i][col + j].is_mine()) {
-					mines_count++;
-				}
-			}
+		if (board->get_status() == 1) {
+			std::cout << "\nYou lost!\n";
 		}
 	}
-
-	return mines_count;
-}
-
-bool Game::is_cell(int row, int col) {
-	if (row < rows && row >= 0 && col < cols && col >= 0)
-		return true;
-	else
-		return false;
 };
 
-void Game::print_board() {
-	for (int i = 0; i < rows; i++) {
-		std::cout << i << " ";
-		for (int j = 0; j < cols; j++) {
-			if (cells[i][j].is_revealed()) {
-				std::cout << "[" << cells[i][j].get_value() << "]";
-			}
-			else {
-				std::cout << "[ ]";
-			}
-		}
-		std::cout << std::endl;
-	}
 
-	std::cout << "   ";
-	for (int i = 0; i < cols; i++) {
-		std::cout << i << "  ";
-	}
 
-};
+
